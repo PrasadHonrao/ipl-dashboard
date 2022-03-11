@@ -1,2 +1,2 @@
-# ipl-dashboard
+# IPL Dashboard
 IPL Dashboard App
