@@ -1,9 +1,7 @@
 package com.ph.ipldashboard.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Team {
@@ -13,6 +11,9 @@ public class Team {
     private String teamName;
     private long totalMatches;
     private long totalWins;
+
+    @Transient // Do not save it in the database
+    private List<MatchOutput> latestMatches;
 
     public Team() {
     }
@@ -52,6 +53,14 @@ public class Team {
 
     public void setTotalWins(long totalWins) {
         this.totalWins = totalWins;
+    }
+
+    public List<MatchOutput> getLatestMatches() {
+        return latestMatches;
+    }
+
+    public void setLatestMatches(List<MatchOutput> latestMatches) {
+        this.latestMatches = latestMatches;
     }
 
     @Override
