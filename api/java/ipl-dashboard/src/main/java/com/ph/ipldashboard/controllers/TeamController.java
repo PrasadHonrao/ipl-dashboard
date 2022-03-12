@@ -1,13 +1,13 @@
 package com.ph.ipldashboard.controllers;
 
+import com.ph.ipldashboard.models.MatchOutput;
 import com.ph.ipldashboard.models.Team;
 import com.ph.ipldashboard.repositories.MatchRepository;
 import com.ph.ipldashboard.repositories.TeamRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -27,6 +27,19 @@ public class TeamController {
         Team team = teamRepository.findByTeamName(teamName);
         team.setLatestMatches(matchRepository.findTop5ByTeam1OrTeam2OrderByDateDesc(teamName, teamName));
         return team;
+    }
+
+    @GetMapping("/team/{teamName}/matches")
+    public List<MatchOutput> getMatchesForTeam(@PathVariable String teamName, @RequestParam int year) {
+        LocalDate startDate = LocalDate.of(year, 1, 1);
+        LocalDate endDate = LocalDate.of(year+1, 1, 1);
+
+        // JPQL Way
+//        List<MatchOutput> matches = this.matchRepository.
+//                findByTeam1AndDateBetweenOrTeam2AndDateBetweenOrderByDateDesc(teamName, startDate, endDate, teamName, startDate, endDate);
+
+        // Custom Query
+        return this.matchRepository.getMatchesForTeam(teamName, startDate, endDate);
     }
 
 }
