@@ -29,8 +29,8 @@ public class TeamController {
         return team;
     }
 
-    @GetMapping("/team/{teamName}/matches")
-    public List<MatchOutput> getMatchesForTeam(@PathVariable String teamName, @RequestParam int year) {
+    @GetMapping("/team/{teamName}/matches/{year}")
+    public List<MatchOutput> getMatchesForTeam(@PathVariable String teamName, @PathVariable int year) {
         LocalDate startDate = LocalDate.of(year, 1, 1);
         LocalDate endDate = LocalDate.of(year+1, 1, 1);
 
