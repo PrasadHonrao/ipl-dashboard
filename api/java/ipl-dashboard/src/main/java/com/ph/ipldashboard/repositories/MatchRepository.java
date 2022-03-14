@@ -24,4 +24,7 @@ public interface MatchRepository extends JpaRepository<MatchOutput, Long> {
             @Param("startDate") LocalDate startDate,
             @Param("endDate")LocalDate endDate
     );
+
+    @Query("SELECT distinct year(m.date) from Match m order by year(m.date) desc")
+    List<Integer> getYears();
 }

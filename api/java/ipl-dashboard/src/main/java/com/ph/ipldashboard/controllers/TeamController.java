@@ -42,4 +42,9 @@ public class TeamController {
         return this.matchRepository.getMatchesForTeam(teamName, startDate, endDate);
     }
 
+    @GetMapping("/years")
+    public List<Integer> getYears() {
+        return matchRepository.getYears();
+    }
+
 }

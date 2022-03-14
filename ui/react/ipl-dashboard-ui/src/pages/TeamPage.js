@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { MatchDetailCard } from '../components/MatchDetailCard';
 import { MatchSmallCard } from '../components/MatchSmallCard';
 import { PieChart } from 'react-minimal-pie-chart';
@@ -14,9 +14,8 @@ export const TeamPage = () => {
 
     useEffect(
         () => {
-            
-            const fetchMatches = async () => {
-                console.log("Fetching matches");
+                const fetchMatches = async () => {
+                console.log("Fetching matches for team: " + teamName);
                 const response = await fetch(`http://localhost:8080/team/${teamName}`);
                 const data = await response.json();
                 console.log(data);
@@ -53,8 +52,9 @@ export const TeamPage = () => {
             
             {team.latestMatches.slice(1).map(match => <MatchSmallCard teamName={team.teamName} match={match} />)}
             
+            {/* ToDo: Add a link to the previous year's matches */}
             <div className='more-link'>
-                <a href="#">More > </a>
+                <Link to={'#'}>More ></Link>
             </div>
         </div>
     );
