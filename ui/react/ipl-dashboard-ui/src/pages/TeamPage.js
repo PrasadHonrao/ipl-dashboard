@@ -50,7 +50,7 @@ export const TeamPage = () => {
                 <MatchDetailCard teamName={team.teamName} match={team.latestMatches[0]} />
             </div>
             
-            {team.latestMatches.slice(1).map(match => <MatchSmallCard teamName={team.teamName} match={match} />)}
+            {team.latestMatches.slice(1).map(match => <MatchSmallCard key={match.id} teamName={team.teamName} match={match} />)}
             
             {/* ToDo: Add a link to the previous year's matches */}
             <div className='more-link'>
