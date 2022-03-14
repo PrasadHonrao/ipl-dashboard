@@ -47,4 +47,9 @@ public class TeamController {
         return matchRepository.getYears();
     }
 
+    @GetMapping("/team")
+    public List<Team> getTeams() {
+        return teamRepository.findAll();
+    }
+
 }
